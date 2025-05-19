@@ -1,17 +1,23 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import
-    {
-        NavigationMenu,
-        NavigationMenuItem,
-        NavigationMenuLink,
-        NavigationMenuList,
-        navigationMenuTriggerStyle,
-    } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 import data from "@/lib/data";
 import { AlignJustify } from "lucide-react";
 import Link from "next/link";
 import Search from "./Search";
+import DropdownHeader from "./dropdownHeader";
 import Menu from "./menu";
+
 const Header = () => {
   return (
     <div>
@@ -25,12 +31,17 @@ const Header = () => {
         {/* User & Card */}
         <Menu className="hidden md:flex" />
         {/* Mobile toggle Menu */}
-        <Button
-          className="md:hidden block"
-          variant="outline">
-          <AlignJustify className="h-4 w-4" />
-          <span className="sr-only">Toggle Menu</span>
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="md:hidden flex items-center justify-center">
+            <Button
+              className="md:hidden block"
+              variant="outline">
+              <AlignJustify className="h-4 w-4" />
+              <span className="sr-only">Toggle Menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownHeader />
+        </DropdownMenu>
       </header>
 
       <nav className="p-1 border-b hidden md:flex  md:items-center">
