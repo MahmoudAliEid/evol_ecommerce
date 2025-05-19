@@ -30,6 +30,7 @@ const Header = () => {
         <Search className="hidden md:flex" />
         {/* User & Card */}
         <Menu className="hidden md:flex" />
+
         {/* Mobile toggle Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger

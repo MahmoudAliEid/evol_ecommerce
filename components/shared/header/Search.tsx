@@ -42,7 +42,7 @@ const Search = ({ className }: { className: string }) => {
         <Button
           type="submit"
           className="bg-primary text-primary-foreground rounded-l-none  px-4 py-2 hover:bg-primary/90">
-          <SearchIcon className="h-4 w-4" />
+          <SearchIcon className="h-4 w-4 dark:text-white" />
           <span className="sr-only font-bold">Search</span>
         </Button>
       </div>
