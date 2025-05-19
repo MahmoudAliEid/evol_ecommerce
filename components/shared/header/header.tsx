@@ -14,14 +14,37 @@ import {
 import data from "@/lib/data";
 import { AlignJustify } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import Search from "./Search";
 import DropdownHeader from "./dropdownHeader";
 import Menu from "./menu";
 
 const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const headerClass = isScrolled
+    ? "sticky top-0 left-0 w-full bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+    : "bg-white dark:bg-black transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]";
+
   return (
-    <div>
-      <header className="flex border-b justify-between items-center p-4 ">
+    <div
+      className={`${headerClass} z-50 border-b`}
+      style={{
+        backdropFilter: isScrolled ? "blur(8px)" : "none",
+        WebkitBackdropFilter: isScrolled ? "blur(8px)" : "none",
+      }}>
+      <header className="flex justify-between border-b items-center p-4">
         {/* LOGO */}
         <div className="flex items-center gap-2 justify-between">
           <h1 className="text-1xl font-bold">EVOL</h1>
@@ -47,12 +70,14 @@ const Header = () => {
         </DropdownMenu>
       </header>
 
-      <nav className="p-1 border-b hidden md:flex  md:items-center">
+      <nav className="p-1 border-b hidden md:flex md:items-center">
         {/* MENU */}
         <NavigationMenu className="flex items-center gap-4">
           <NavigationMenuList>
             {data.headerMenus.map((category) => (
-              <NavigationMenuItem key={category.name}>
+              <NavigationMenuItem
+                className="border-1 rounded-md"
+                key={category.name}>
                 <NavigationMenuLink asChild>
                   <Link
                     href={`${category.href}`}

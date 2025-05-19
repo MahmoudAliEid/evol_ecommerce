@@ -2,31 +2,31 @@ const data = {
   headerMenus: [
     {
       name: "Today's Deal",
-      herf: "/search?tag=todays-deal",
+      href: "/search?tag=todays-deal",
     },
     {
       name: "New Arrivals",
-      herf: "/search?tag=new-arrival",
+      href: "/search?tag=new-arrival",
     },
     {
       name: "Featured Products",
-      herf: "/search?tag=featured",
+      href: "/search?tag=featured",
     },
     {
       name: "Best Sellers",
-      herf: "/search?tag=best-seller",
+      href: "/search?tag=best-seller",
     },
     {
       name: "Browsing History",
-      herf: "/#browsing-history",
+      href: "/#browsing-history",
     },
     {
       name: "Customer Service",
-      herf: "/page/customer-service",
+      href: "/page/customer-service",
     },
     {
       name: "About Us",
-      herf: "/page/about-us",
+      href: "/page/about-us",
     },
     {
       name: "Help",
