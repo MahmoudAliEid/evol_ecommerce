@@ -32,7 +32,9 @@ const Header = () => {
         <Menu className="hidden md:flex" />
         {/* Mobile toggle Menu */}
         <DropdownMenu>
-          <DropdownMenuTrigger className="md:hidden flex items-center justify-center">
+          <DropdownMenuTrigger
+            asChild
+            className="md:hidden flex items-center justify-center">
             <Button
               className="md:hidden block"
               variant="outline">
