@@ -27,12 +27,19 @@ model Product {
   isPublished Boolean
   numReviews Int
   reviews    String[]
+  ratingDistribution RatingCount[]
   numSales   Int
   description String
   countInStock Int
   price       Float
   listPrice   Float
-  image       String
+  images       String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// Composite type for rating distribution
+type RatingCount {
+  rating Int
+  count  Int
 }

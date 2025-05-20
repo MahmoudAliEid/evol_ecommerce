@@ -40,4 +40,15 @@ export const ProductInputSchema = z.object({
     .number()
     .int()
     .nonnegative("Number of sales must be a non-negative integer"),
+  ratingDistribution: z
+    .array(
+      z.object({
+        rating: z.coerce.number().int().min(1).max(5),
+        count: z.coerce.number().int().nonnegative(),
+      })
+    )
+    .length(
+      5,
+      "ratingDistribution must have exactly 5 items (for ratings 1-5)"
+    ),
 });

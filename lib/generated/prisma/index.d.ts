@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model RatingCount
+ * 
+ */
+export type RatingCount = $Result.DefaultSelection<Prisma.$RatingCountPayload>
+/**
  * Model Product
  * 
  */
@@ -824,6 +829,69 @@ export namespace Prisma {
    */
 
   /**
+   * Model RatingCount
+   */
+
+
+
+
+
+  export type RatingCountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    rating?: boolean
+    count?: boolean
+  }, ExtArgs["result"]["ratingCount"]>
+
+
+
+  export type RatingCountSelectScalar = {
+    rating?: boolean
+    count?: boolean
+  }
+
+  export type RatingCountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"rating" | "count", ExtArgs["result"]["ratingCount"]>
+
+  export type $RatingCountPayload = {
+    name: "RatingCount"
+    objects: {}
+    scalars: {
+      rating: number
+      count: number
+    }
+    composites: {}
+  }
+
+  type RatingCountGetPayload<S extends boolean | null | undefined | RatingCountDefaultArgs> = $Result.GetResult<Prisma.$RatingCountPayload, S>
+
+
+
+
+
+  /**
+   * Fields of the RatingCount model
+   */
+  interface RatingCountFieldRefs {
+    readonly rating: FieldRef<"RatingCount", 'Int'>
+    readonly count: FieldRef<"RatingCount", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RatingCount without action
+   */
+  export type RatingCountDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RatingCount
+     */
+    select?: RatingCountSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RatingCount
+     */
+    omit?: RatingCountOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model Product
    */
 
@@ -867,7 +935,6 @@ export namespace Prisma {
     countInStock: number | null
     price: number | null
     listPrice: number | null
-    image: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -886,7 +953,6 @@ export namespace Prisma {
     countInStock: number | null
     price: number | null
     listPrice: number | null
-    image: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -909,7 +975,7 @@ export namespace Prisma {
     countInStock: number
     price: number
     listPrice: number
-    image: number
+    images: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -948,7 +1014,6 @@ export namespace Prisma {
     countInStock?: true
     price?: true
     listPrice?: true
-    image?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -967,7 +1032,6 @@ export namespace Prisma {
     countInStock?: true
     price?: true
     listPrice?: true
-    image?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -990,7 +1054,7 @@ export namespace Prisma {
     countInStock?: true
     price?: true
     listPrice?: true
-    image?: true
+    images?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1100,7 +1164,7 @@ export namespace Prisma {
     countInStock: number
     price: number
     listPrice: number
-    image: string
+    images: string[]
     createdAt: Date
     updatedAt: Date
     _count: ProductCountAggregateOutputType | null
@@ -1137,12 +1201,13 @@ export namespace Prisma {
     isPublished?: boolean
     numReviews?: boolean
     reviews?: boolean
+    ratingDistribution?: boolean | RatingCountDefaultArgs<ExtArgs>
     numSales?: boolean
     description?: boolean
     countInStock?: boolean
     price?: boolean
     listPrice?: boolean
-    image?: boolean
+    images?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["product"]>
@@ -1167,12 +1232,13 @@ export namespace Prisma {
     countInStock?: boolean
     price?: boolean
     listPrice?: boolean
-    image?: boolean
+    images?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "category" | "brand" | "tags" | "sizes" | "colors" | "avgRating" | "isPublished" | "numReviews" | "reviews" | "numSales" | "description" | "countInStock" | "price" | "listPrice" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "category" | "brand" | "tags" | "sizes" | "colors" | "avgRating" | "isPublished" | "numReviews" | "reviews" | "ratingDistribution" | "numSales" | "description" | "countInStock" | "price" | "listPrice" | "images" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Product"
@@ -1195,11 +1261,13 @@ export namespace Prisma {
       countInStock: number
       price: number
       listPrice: number
-      image: string
+      images: string[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["product"]>
-    composites: {}
+    composites: {
+      ratingDistribution: Prisma.$RatingCountPayload[]
+    }
   }
 
   type ProductGetPayload<S extends boolean | null | undefined | ProductDefaultArgs> = $Result.GetResult<Prisma.$ProductPayload, S>
@@ -1607,7 +1675,7 @@ export namespace Prisma {
     readonly countInStock: FieldRef<"Product", 'Int'>
     readonly price: FieldRef<"Product", 'Float'>
     readonly listPrice: FieldRef<"Product", 'Float'>
-    readonly image: FieldRef<"Product", 'String'>
+    readonly images: FieldRef<"Product", 'String[]'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
   }
@@ -1627,6 +1695,10 @@ export namespace Prisma {
      */
     omit?: ProductOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
      * Filter, which Product to fetch.
      */
     where: ProductWhereUniqueInput
@@ -1645,6 +1717,10 @@ export namespace Prisma {
      */
     omit?: ProductOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
      * Filter, which Product to fetch.
      */
     where: ProductWhereUniqueInput
@@ -1662,6 +1738,10 @@ export namespace Prisma {
      * Omit specific fields from the Product
      */
     omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
     /**
      * Filter, which Product to fetch.
      */
@@ -1711,6 +1791,10 @@ export namespace Prisma {
      */
     omit?: ProductOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
      * Filter, which Product to fetch.
      */
     where?: ProductWhereInput
@@ -1759,6 +1843,10 @@ export namespace Prisma {
      */
     omit?: ProductOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
      * Filter, which Products to fetch.
      */
     where?: ProductWhereInput
@@ -1802,6 +1890,10 @@ export namespace Prisma {
      */
     omit?: ProductOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
      * The data needed to create a Product.
      */
     data: XOR<ProductCreateInput, ProductUncheckedCreateInput>
@@ -1829,6 +1921,10 @@ export namespace Prisma {
      * Omit specific fields from the Product
      */
     omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
     /**
      * The data needed to update a Product.
      */
@@ -1870,6 +1966,10 @@ export namespace Prisma {
      */
     omit?: ProductOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
      * The filter to search for the Product to update in case it exists.
      */
     where: ProductWhereUniqueInput
@@ -1895,6 +1995,10 @@ export namespace Prisma {
      * Omit specific fields from the Product
      */
     omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
     /**
      * Filter which Product to delete.
      */
@@ -1955,6 +2059,10 @@ export namespace Prisma {
      * Omit specific fields from the Product
      */
     omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
   }
 
 
@@ -1980,7 +2088,7 @@ export namespace Prisma {
     countInStock: 'countInStock',
     price: 'price',
     listPrice: 'listPrice',
-    image: 'image',
+    images: 'images',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -2091,12 +2199,13 @@ export namespace Prisma {
     isPublished?: BoolFilter<"Product"> | boolean
     numReviews?: IntFilter<"Product"> | number
     reviews?: StringNullableListFilter<"Product">
+    ratingDistribution?: RatingCountCompositeListFilter | RatingCountObjectEqualityInput[]
     numSales?: IntFilter<"Product"> | number
     description?: StringFilter<"Product"> | string
     countInStock?: IntFilter<"Product"> | number
     price?: FloatFilter<"Product"> | number
     listPrice?: FloatFilter<"Product"> | number
-    image?: StringFilter<"Product"> | string
+    images?: StringNullableListFilter<"Product">
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
   }
@@ -2114,12 +2223,13 @@ export namespace Prisma {
     isPublished?: SortOrder
     numReviews?: SortOrder
     reviews?: SortOrder
+    ratingDistribution?: RatingCountOrderByCompositeAggregateInput
     numSales?: SortOrder
     description?: SortOrder
     countInStock?: SortOrder
     price?: SortOrder
     listPrice?: SortOrder
-    image?: SortOrder
+    images?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -2140,12 +2250,13 @@ export namespace Prisma {
     isPublished?: BoolFilter<"Product"> | boolean
     numReviews?: IntFilter<"Product"> | number
     reviews?: StringNullableListFilter<"Product">
+    ratingDistribution?: RatingCountCompositeListFilter | RatingCountObjectEqualityInput[]
     numSales?: IntFilter<"Product"> | number
     description?: StringFilter<"Product"> | string
     countInStock?: IntFilter<"Product"> | number
     price?: FloatFilter<"Product"> | number
     listPrice?: FloatFilter<"Product"> | number
-    image?: StringFilter<"Product"> | string
+    images?: StringNullableListFilter<"Product">
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
   }, "id" | "slug">
@@ -2168,7 +2279,7 @@ export namespace Prisma {
     countInStock?: SortOrder
     price?: SortOrder
     listPrice?: SortOrder
-    image?: SortOrder
+    images?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductCountOrderByAggregateInput
@@ -2199,7 +2310,7 @@ export namespace Prisma {
     countInStock?: IntWithAggregatesFilter<"Product"> | number
     price?: FloatWithAggregatesFilter<"Product"> | number
     listPrice?: FloatWithAggregatesFilter<"Product"> | number
-    image?: StringWithAggregatesFilter<"Product"> | string
+    images?: StringNullableListFilter<"Product">
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
   }
@@ -2217,12 +2328,13 @@ export namespace Prisma {
     isPublished: boolean
     numReviews: number
     reviews?: ProductCreatereviewsInput | string[]
+    ratingDistribution?: XOR<RatingCountListCreateEnvelopeInput, RatingCountCreateInput> | RatingCountCreateInput[]
     numSales: number
     description: string
     countInStock: number
     price: number
     listPrice: number
-    image: string
+    images?: ProductCreateimagesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -2240,12 +2352,13 @@ export namespace Prisma {
     isPublished: boolean
     numReviews: number
     reviews?: ProductCreatereviewsInput | string[]
+    ratingDistribution?: XOR<RatingCountListCreateEnvelopeInput, RatingCountCreateInput> | RatingCountCreateInput[]
     numSales: number
     description: string
     countInStock: number
     price: number
     listPrice: number
-    image: string
+    images?: ProductCreateimagesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -2262,12 +2375,13 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     numReviews?: IntFieldUpdateOperationsInput | number
     reviews?: ProductUpdatereviewsInput | string[]
+    ratingDistribution?: XOR<RatingCountListUpdateEnvelopeInput, RatingCountCreateInput> | RatingCountCreateInput[]
     numSales?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     countInStock?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     listPrice?: FloatFieldUpdateOperationsInput | number
-    image?: StringFieldUpdateOperationsInput | string
+    images?: ProductUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2284,12 +2398,13 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     numReviews?: IntFieldUpdateOperationsInput | number
     reviews?: ProductUpdatereviewsInput | string[]
+    ratingDistribution?: XOR<RatingCountListUpdateEnvelopeInput, RatingCountCreateInput> | RatingCountCreateInput[]
     numSales?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     countInStock?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     listPrice?: FloatFieldUpdateOperationsInput | number
-    image?: StringFieldUpdateOperationsInput | string
+    images?: ProductUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2307,12 +2422,13 @@ export namespace Prisma {
     isPublished: boolean
     numReviews: number
     reviews?: ProductCreatereviewsInput | string[]
+    ratingDistribution?: XOR<RatingCountListCreateEnvelopeInput, RatingCountCreateInput> | RatingCountCreateInput[]
     numSales: number
     description: string
     countInStock: number
     price: number
     listPrice: number
-    image: string
+    images?: ProductCreateimagesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -2329,12 +2445,13 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     numReviews?: IntFieldUpdateOperationsInput | number
     reviews?: ProductUpdatereviewsInput | string[]
+    ratingDistribution?: XOR<RatingCountListUpdateEnvelopeInput, RatingCountCreateInput> | RatingCountCreateInput[]
     numSales?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     countInStock?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     listPrice?: FloatFieldUpdateOperationsInput | number
-    image?: StringFieldUpdateOperationsInput | string
+    images?: ProductUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2351,12 +2468,13 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     numReviews?: IntFieldUpdateOperationsInput | number
     reviews?: ProductUpdatereviewsInput | string[]
+    ratingDistribution?: XOR<RatingCountListUpdateEnvelopeInput, RatingCountCreateInput> | RatingCountCreateInput[]
     numSales?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     countInStock?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     listPrice?: FloatFieldUpdateOperationsInput | number
-    image?: StringFieldUpdateOperationsInput | string
+    images?: ProductUpdateimagesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2411,6 +2529,20 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type RatingCountCompositeListFilter = {
+    equals?: RatingCountObjectEqualityInput[]
+    every?: RatingCountWhereInput
+    some?: RatingCountWhereInput
+    none?: RatingCountWhereInput
+    isEmpty?: boolean
+    isSet?: boolean
+  }
+
+  export type RatingCountObjectEqualityInput = {
+    rating: number
+    count: number
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2420,6 +2552,10 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type RatingCountOrderByCompositeAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProductCountOrderByAggregateInput = {
@@ -2440,7 +2576,7 @@ export namespace Prisma {
     countInStock?: SortOrder
     price?: SortOrder
     listPrice?: SortOrder
-    image?: SortOrder
+    images?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -2468,7 +2604,6 @@ export namespace Prisma {
     countInStock?: SortOrder
     price?: SortOrder
     listPrice?: SortOrder
-    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -2487,7 +2622,6 @@ export namespace Prisma {
     countInStock?: SortOrder
     price?: SortOrder
     listPrice?: SortOrder
-    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -2589,6 +2723,19 @@ export namespace Prisma {
     set: string[]
   }
 
+  export type RatingCountListCreateEnvelopeInput = {
+    set?: RatingCountCreateInput | RatingCountCreateInput[]
+  }
+
+  export type RatingCountCreateInput = {
+    rating: number
+    count: number
+  }
+
+  export type ProductCreateimagesInput = {
+    set: string[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2629,6 +2776,18 @@ export namespace Prisma {
   }
 
   export type ProductUpdatereviewsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type RatingCountListUpdateEnvelopeInput = {
+    set?: RatingCountCreateInput | RatingCountCreateInput[]
+    push?: RatingCountCreateInput | RatingCountCreateInput[]
+    updateMany?: RatingCountUpdateManyInput
+    deleteMany?: RatingCountDeleteManyInput
+  }
+
+  export type ProductUpdateimagesInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -2676,6 +2835,14 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type RatingCountWhereInput = {
+    AND?: RatingCountWhereInput | RatingCountWhereInput[]
+    OR?: RatingCountWhereInput[]
+    NOT?: RatingCountWhereInput | RatingCountWhereInput[]
+    rating?: IntFilter<"RatingCount"> | number
+    count?: IntFilter<"RatingCount"> | number
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2758,6 +2925,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type RatingCountUpdateManyInput = {
+    where: RatingCountWhereInput
+    data: RatingCountUpdateInput
+  }
+
+  export type RatingCountDeleteManyInput = {
+    where: RatingCountWhereInput
+  }
+
+  export type RatingCountUpdateInput = {
+    rating?: IntFieldUpdateOperationsInput | number
+    count?: IntFieldUpdateOperationsInput | number
   }
 
 

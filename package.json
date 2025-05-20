@@ -6,10 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seed": "npx ts ./lib/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
+    "@prisma/extension-accelerate": "^2.0.0",
     "@radix-ui/react-dropdown-menu": "^2.1.14",
     "@radix-ui/react-navigation-menu": "^1.2.12",
     "@radix-ui/react-select": "^2.2.4",
