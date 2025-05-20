@@ -23,27 +23,23 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      const offset = window.scrollY;
+      setIsScrolled(offset > 50);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const headerClass = isScrolled
-    ? "sticky top-0 left-0 w-full bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-xl transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-    : "bg-white dark:bg-black transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]";
+    ? " bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-xl"
+    : "bg-white dark:bg-black ";
 
   return (
     <div
-      className={`${headerClass} z-50 border-b`}
-      style={{
-        backdropFilter: isScrolled ? "blur(8px)" : "none",
-        WebkitBackdropFilter: isScrolled ? "blur(8px)" : "none",
-      }}>
+      className={`fixed  top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${headerClass}`}>
       <header className="flex justify-between border-b items-center p-4">
         {/* LOGO */}
         <div className="flex items-center gap-2 justify-between">
