@@ -24,3 +24,24 @@ export const toSlug = (text: string): string => {
     .replace(/--+/g, "-")
     .replace(/^-+|-+$/g, "");
 };
+
+export const formatPrice = (price: number): string => {
+  return `$${formatNumberWithDecimal(price)}`;
+};
+const CURRENCY_FORMAT = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+export const formatCurrency = (price: number): string => {
+  return CURRENCY_FORMAT.format(price);
+};
+
+const NumberFormat = new Intl.NumberFormat("en-US");
+
+export const formatNumber = (num: number): string => {
+  return NumberFormat.format(num);
+};
+
+

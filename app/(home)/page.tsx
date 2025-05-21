@@ -1,4 +1,6 @@
 import HomeCarousel from "@/components/shared/home-carousel";
+import ProductPrice from "@/components/shared/product/product-price";
+import Rating from "@/components/shared/product/Ratting";
 import {
   getAllCategories,
   getProductsForCard,
@@ -61,6 +63,18 @@ export default async function Home() {
       <HomeCarousel carousels={data.carousels} />
       <div className="md:p-4  md:space-y-4">
         <HomeCard cards={cards} />
+        <Rating
+          ratting={3.5}
+          size={6}
+        />
+        <ProductPrice
+          price={100}
+          className="text-2xl font-bold"
+          forListing={true}
+          plain={false}
+          isDeal={true}
+          listPrice={200}
+        />
       </div>
     </div>
   );
