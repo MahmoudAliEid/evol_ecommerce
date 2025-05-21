@@ -46,17 +46,17 @@ const Header = () => {
           <h1 className="text-1xl font-bold">EVOL</h1>
           {/* SEARCH BAR */}
         </div>
-        <Search className="hidden md:flex" />
+        <Search className="hidden lg:flex" />
         {/* User & Card */}
-        <Menu className="hidden md:flex" />
+        <Menu className="hidden lg:flex" />
 
         {/* Mobile toggle Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger
             asChild
-            className="md:hidden flex items-center justify-center">
+            className="lg:hidden flex items-center justify-center">
             <Button
-              className="md:hidden block"
+              className="lg:hidden block"
               variant="outline">
               <AlignJustify className="h-4 w-4" />
               <span className="sr-only">Toggle Menu</span>
@@ -66,7 +66,7 @@ const Header = () => {
         </DropdownMenu>
       </header>
 
-      <nav className="p-1 border-b hidden md:flex md:items-center">
+      <nav className="p-1 border-b hidden lg:flex md:items-center">
         {/* MENU */}
         <NavigationMenu className="flex items-center gap-4">
           <NavigationMenuList>
