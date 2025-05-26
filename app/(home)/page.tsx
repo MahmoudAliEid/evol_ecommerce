@@ -1,8 +1,10 @@
 import HomeCarousel from "@/components/shared/home-carousel";
-import ProductPrice from "@/components/shared/product/product-price";
-import Rating from "@/components/shared/product/Ratting";
+// import ProductPrice from "@/components/shared/product/product-price";
+// import Rating from "@/components/shared/product/Ratting";
+import ProductSlider from "@/components/shared/product/product-slider";
 import {
   getAllCategories,
+  getProductByTag,
   getProductsForCard,
 } from "@/lib/actions/product-actions";
 import data from "@/lib/data";
@@ -57,24 +59,25 @@ export default async function Home() {
       },
     },
   ];
-  console.log(cards);
+  const todaysDeals = await getProductByTag({
+    tag: "todays-deal",
+  });
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-50 dark:bg-black ">
       <HomeCarousel carousels={data.carousels} />
-      <div className="md:p-4  md:space-y-4">
-        <HomeCard cards={cards} />
-        <Rating
-          ratting={3.5}
-          size={6}
-        />
-        <ProductPrice
-          price={100}
-          className="text-2xl font-bold"
-          forListing={true}
-          plain={false}
-          isDeal={true}
-          listPrice={200}
-        />
+      <div className="w-full px-2 md:px-4 py-4 space-y-4 flex flex-col items-center">
+        <div className="w-full max-w-7xl">
+          <HomeCard cards={cards} />
+        </div>
+        <div className="w-full max-w-7xl">
+          <div className="p-2 md:p-4 flex flex-col items-center gap-3">
+            <ProductSlider
+              title="Today's Deals"
+              products={todaysDeals}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

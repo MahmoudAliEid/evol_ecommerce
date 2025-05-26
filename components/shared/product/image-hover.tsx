@@ -27,40 +27,43 @@ const ImageHover = ({
     }
 
   return (
-      <div
-            className="relative w-full h-52"
-            onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-      >
-          <motion.div
-                initial={{ filter: 'blur(16px)', scale: 1.05 }}
-                animate={{ filter: isLoaded ? 'blur(0px)' : 'blur(16px)', scale: isLoaded ? 1 : 1.05 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="w-full h-full absolute top-0 left-0"
-            >
+    <div
+      className="relative w-full h-52"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
+      <motion.div
+        initial={{ filter: "blur(16px)", scale: 1.05 }}
+        animate={{
+          filter: isLoaded ? "blur(0px)" : "blur(16px)",
+          scale: isLoaded ? 1 : 1.05,
+        }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="w-full h-full absolute top-0 left-0">
+        <Image
+          src={src}
+          sizes="100vw"
+          fill
+          alt={alt}
+          className={`object-cover transition-opacity  rounded-md duration-500 ${
+            isHovered ? "opacity-0" : "opacity-100"
+          }`}
+          onLoadingComplete={() => setIsLoaded(true)}
+        />
+        {isHovered && (
           <Image
-              src={src}
-              sizes='80vw'
-              fill
-              alt={alt}
-                className={`object-cover transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
-                onLoadingComplete={() => setIsLoaded(true)}
-              />
-              {
-                isHovered && (
-                    <Image
-                        src={hoverSrc}
-                        sizes='80vw'
-                        fill
-                        alt={alt}
-                        className={`object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-                        onLoadingComplete={() => setIsLoaded(true)}
-                    />
-                )
-              }
-          </motion.div>
-          </div>
-  )
+            src={hoverSrc}
+            sizes="100vw"
+            fill
+            alt={alt}
+            className={`object-cover transition-opacity duration-500  rounded-md ${
+              isHovered ? "opacity-100" : "opacity-0"
+            }`}
+            onLoadingComplete={() => setIsLoaded(true)}
+          />
+        )}
+      </motion.div>
+    </div>
+  );
 }
 
 export default ImageHover

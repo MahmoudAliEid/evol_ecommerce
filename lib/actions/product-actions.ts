@@ -46,5 +46,21 @@ export const getProductsForCard = async ({
   }));
 };
 
-
+export const getProductByTag = async ({
+  tag,
+  limit,
+}: {
+  tag: string;
+  limit?: number;
+}) => {
+  const products = await Prisma.product.findMany({
+    where: {
+      tags: { has: tag },
+      isPublished: true,
+    },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+  });
+  return products;
+};
 

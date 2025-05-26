@@ -1,8 +1,8 @@
 import { Star } from "lucide-react";
 
-export default function ratting({
-  ratting ,
-  size ,
+export default function Ratting({
+  ratting,
+  size,
 }: {
   ratting: number;
   size?: number;

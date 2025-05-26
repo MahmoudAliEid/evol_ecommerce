@@ -31,7 +31,7 @@ const HomeCarousel = (
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full pt-24 "
+      className="w-full  min-h-[220px] sm:min-h-[260px] md:min-h-[320px] lg:min-h-[400px] xl:min-h-[480px] 2xl:min-h-[600px] p-0 m-0 "
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}>
       <CarouselContent className="w-full p-0 m-0">
