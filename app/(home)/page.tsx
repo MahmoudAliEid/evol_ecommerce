@@ -62,6 +62,9 @@ export default async function Home() {
   const todaysDeals = await getProductByTag({
     tag: "todays-deal",
   });
+  const bestSellersProducts = await getProductByTag({
+    tag: "best-seller",
+  });
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-50 dark:bg-black ">
@@ -75,6 +78,15 @@ export default async function Home() {
             <ProductSlider
               title="Today's Deals"
               products={todaysDeals}
+            />
+          </div>
+        </div>
+        <div className="w-full max-w-7xl">
+          <div className="p-2 md:p-4 flex flex-col items-center gap-3">
+            <ProductSlider
+              title="Best Sellers"
+              hideDetails
+              products={bestSellersProducts}
             />
           </div>
         </div>
