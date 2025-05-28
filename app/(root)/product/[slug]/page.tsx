@@ -1,3 +1,5 @@
+import BrowsingHistoryList from "@/components/shared/browsing-history-list";
+import AddToBrowsingHistory from "@/components/shared/product/addToBrowsingHistory";
 import ProductGallery from "@/components/shared/product/product-gallery";
 import ProductPrice from "@/components/shared/product/product-price";
 import ProductSlider from "@/components/shared/product/product-slider";
@@ -6,11 +8,10 @@ import SelectVariant from "@/components/shared/product/select-variant";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import
-    {
-        getOneProductBySlug,
-        getRelatedProductsByCategory,
-    } from "@/lib/actions/product-actions";
+import {
+  getOneProductBySlug,
+  getRelatedProductsByCategory,
+} from "@/lib/actions/product-actions";
 
 export async function generateMetadata({
   params,
@@ -63,8 +64,25 @@ export default async function Page(props: {
     page: parseInt(page || "1", 10),
   });
 
+  if (!relatedProducts) {
+    return {
+      title: "Related Products Not Found",
+      description: "No related products found for this category.",
+    };
+  }
+  if (relatedProducts.products.length === 0) {
+    return {
+      title: "No Related Products",
+      description: "There are no related products available in this category.",
+    };
+  }
+
   return (
-    <div>
+    <div className="pt-52 pb-20">
+      <AddToBrowsingHistory
+        id={product.id}
+        category={product.category}
+      />
       <section>
         <div className="grid grid-cols-1 md:grid-cols-5">
           <div className="col-span-2">
@@ -113,7 +131,7 @@ export default async function Page(props: {
               </p>
             </div>
           </div>
-          <Card>
+          <Card className="h-28">
             <CardContent className="p-4 flex flex-col gap-4">
               <ProductPrice price={product.price} />
               {product.countInStock > 0 && product.countInStock <= 3 && (
@@ -133,13 +151,16 @@ export default async function Page(props: {
             </CardContent>
           </Card>
         </div>
-          </section>
-          <section className="mt-10">
-              <ProductSlider
-                  products={relatedProducts.products}
-                  title={`Related Products in ${product.category}`}
-              />
-          </section>
-      </div>
+      </section>
+      <section className="mt-10 max-w-7xl mx-auto">
+        <ProductSlider
+          products={relatedProducts.products}
+          title={`Related Products in ${product.category}`}
+        />
+      </section>
+      <section>
+        <BrowsingHistoryList className="max-w-7xl mt-10 mx-auto" />
+      </section>
+    </div>
   );
 }

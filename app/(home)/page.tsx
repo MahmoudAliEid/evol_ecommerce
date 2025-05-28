@@ -1,6 +1,7 @@
 import HomeCarousel from "@/components/shared/home-carousel";
 // import ProductPrice from "@/components/shared/product/product-price";
 // import Rating from "@/components/shared/product/Ratting";
+import BrowsingHistoryList from "@/components/shared/browsing-history-list";
 import ProductSlider from "@/components/shared/product/product-slider";
 import {
   getAllCategories,
@@ -90,6 +91,9 @@ export default async function Home() {
             />
           </div>
         </div>
+      </div>
+      <div className="p-4 bg-background">
+        <BrowsingHistoryList className="max-w-7xl mx-auto" />
       </div>
     </div>
   );

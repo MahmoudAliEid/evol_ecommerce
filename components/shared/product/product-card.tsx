@@ -34,10 +34,10 @@ const ProductCard = ({
         ) : (
           <Image
             src={product.images[0]}
-            sizes="100vw"
             fill
+            sizes="80vw"
             alt={product.name}
-            className={`object-cover transition-opacity duration-500 rounded-md `}
+            className={`object-contain transition-opacity duration-500 p-0 m-0 rounded-md `}
           />
         )}
       </>
@@ -98,8 +98,8 @@ const ProductCard = ({
       )}
     </div>
   ) : (
-    <Card className="flex py-0 flex-col h-full border hover:shadow-2xl hover:scale-105 transition-all duration-500 ">
-      <CardHeader className="p-0">
+    <Card className="flex  p-0 flex-col h-full border hover:shadow-2xl hover:scale-105 transition-all duration-500 ">
+      <CardHeader className="p-0 m-0 relative overflow-hidden">
         <ProductImage />
       </CardHeader>
       {!hideDetails && (

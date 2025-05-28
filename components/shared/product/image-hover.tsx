@@ -38,29 +38,27 @@ const ImageHover = ({
           scale: isLoaded ? 1 : 1.05,
         }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full h-full absolute top-0 left-0">
+        className="w-full h-full absolute bottom-0 right-0 top-0 left-0">
         <Image
           src={src}
-          sizes="100vw"
-          fill
           alt={alt}
-          className={`object-cover transition-opacity  rounded-md duration-500 ${
+          fill
+          sizes="80vw"
+          onLoad={() => setIsLoaded(true)}
+          className={`object-contain transition-opacity duration-500 ${
             isHovered ? "opacity-0" : "opacity-100"
           }`}
-          onLoadingComplete={() => setIsLoaded(true)}
         />
-        {isHovered && (
-          <Image
-            src={hoverSrc}
-            sizes="100vw"
-            fill
-            alt={alt}
-            className={`object-cover transition-opacity duration-500  rounded-md ${
-              isHovered ? "opacity-100" : "opacity-0"
-            }`}
-            onLoadingComplete={() => setIsLoaded(true)}
-          />
-        )}
+        <Image
+          src={hoverSrc}
+          alt={alt}
+          fill
+          sizes="80vw"
+          className={`absolute inset-0 object-contain transition-opacity duration-500 ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+          onLoad={() => setIsLoaded(true)}
+        />
       </motion.div>
     </div>
   );
